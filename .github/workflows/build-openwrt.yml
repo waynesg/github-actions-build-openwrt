@@ -1,7 +1,3 @@
-#
-#
-# 感谢p3terx大神的一键编译脚本
-# 
 # Copyright (C) 2019 P3TERX <https://p3terx.com>
 # <https://github.com/P3TERX/Actions-OpenWrt.git>
 #
@@ -32,7 +28,7 @@ env:
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TZ: Asia/Shanghai
-  GITHUB_RELEASE: https://github.com/281677160/build-openwrt/releases
+  GITHUB_RELEASE: https://github.com/waynesg/github-actions-build-openwrt/releases
 
 jobs: 
   build:
@@ -125,7 +121,7 @@ jobs:
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-          git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
+          git clone -b $REPO_BRANCH --single-branch https://github.com/waynesg/OpenWrt-Software.git package/waynesg
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
