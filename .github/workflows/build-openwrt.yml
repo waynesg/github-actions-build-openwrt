@@ -83,8 +83,8 @@ jobs:
       if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
       with:
         SCKEY: ${{ secrets.SCKEY }}
-        text: wayne,${{ env.WXFB_MESSAGE }}编译开始啦
-        desp: wayne,您要编译的[${{ env.WXFB_MESSAGE }}]固件正在努力耕耘中,请耐心等待......
+        text: WAYNE的${{ env.WXFB_MESSAGE }}编译开始啦
+        desp: WAYNE编译的[${{ env.WXFB_MESSAGE }}]固件正在努力耕耘中,请耐心等待......
     
     - name: 开始安装编译所需系统
       env:
@@ -307,7 +307,7 @@ jobs:
       if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
       with:
         SCKEY: ${{ secrets.SCKEY }}
-        text: 恭喜WAYNE,${{ env.WXFB_MESSAGE }}固件编译成功！
+        text: 恭喜WAYNE的${{ env.WXFB_MESSAGE }}固件编译成功！
         desp: 您要编译的[ ${{ env.NAME2 }}${{ env.NAME1 }} ]固件顺利编译完成了！
               
               
