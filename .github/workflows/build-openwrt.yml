@@ -32,7 +32,7 @@ env:
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TZ: Asia/Shanghai
-  GITHUB_RELEASE: https://github.com/281677160/build-openwrt/releases
+  GITHUB_RELEASE: https://github.com/waynesg/github-actions-build-openwrt/releases
 
 jobs: 
   build:
@@ -83,8 +83,8 @@ jobs:
       if: env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
       with:
         SCKEY: ${{ secrets.SCKEY }}
-        text: 主人${{ env.WXFB_MESSAGE }}编译开始啦
-        desp: 主人您要编译的[${{ env.WXFB_MESSAGE }}]固件正在努力耕耘中,请耐心等待......
+        text: wayne,${{ env.WXFB_MESSAGE }}编译开始啦
+        desp: wayne,您要编译的[${{ env.WXFB_MESSAGE }}]固件正在努力耕耘中,请耐心等待......
     
     - name: 开始安装编译所需系统
       env:
@@ -125,7 +125,7 @@ jobs:
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
         fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-          git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
+          git clone https://github.com/waynesg/OpenWrt-Software.git package/waynesg
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
@@ -307,8 +307,8 @@ jobs:
       if: steps.organizer.outputs.status == 'success' && env.SERVERCHAN_SCKEY == 'true' || (github.event.inputs.wxtz == 'wxtz' && github.event.inputs.wxtz  != 'false')
       with:
         SCKEY: ${{ secrets.SCKEY }}
-        text: 恭喜主人${{ env.WXFB_MESSAGE }}固件编译成功！
-        desp: 我亲爱的主人您要编译的[ ${{ env.NAME2 }}${{ env.NAME1 }} ]固件顺利编译完成了！
+        text: 恭喜WAYNE,${{ env.WXFB_MESSAGE }}固件编译成功！
+        desp: 您要编译的[ ${{ env.NAME2 }}${{ env.NAME1 }} ]固件顺利编译完成了！
               
               
               完成时间：${{ env.date1 }}
@@ -323,4 +323,4 @@ jobs:
               WeTransfer：${{ env.WETRANSFER_URL }}
               
               
-              祝小主人见人爱，花见花开，车见车载，天天好心情🎈！！！
+              祝我的主人见人爱，花见花开，车见车载，天天好心情🎈！！！
