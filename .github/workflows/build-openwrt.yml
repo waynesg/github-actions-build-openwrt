@@ -1,3 +1,7 @@
+#
+#
+# 感谢p3terx大神的一键编译脚本
+# 
 # Copyright (C) 2019 P3TERX <https://p3terx.com>
 # <https://github.com/P3TERX/Actions-OpenWrt.git>
 #
@@ -28,7 +32,7 @@ env:
   TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
   TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
   TZ: Asia/Shanghai
-  GITHUB_RELEASE: https://github.com/waynesg/github-actions-build-openwrt/releases
+  GITHUB_RELEASE: https://github.com/281677160/build-openwrt/releases
 
 jobs: 
   build:
@@ -104,8 +108,8 @@ jobs:
         cd openwrt
         if [ ${{matrix.target}} != openwrt ]; then
           rm -rf package/lienol/luci-app-timecontrol
-          rm -rf package/ntlf9t/{smartdns,luci-app-smartdns}
-          rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3}
+          rm -rf package/diy/luci-app-adguardhome
+          rm -rf package/ctcgfw/{luci-app-argon-config,luci-theme-argonv3,luci-app-adguardhome}
           rm -rf package/lean/{luci-app-netdata,luci-theme-argon,k3screenctrl}
         fi
         
@@ -119,9 +123,9 @@ jobs:
         if [ -f "build/${{matrix.target}}/$DIY_P1_SH" ]; then
           chmod +x build/${{matrix.target}}/$DIY_P1_SH
           /bin/bash "build/${{matrix.target}}/$DIY_P1_SH"
-        fi 
+        fi
         if [ ${{matrix.target}} != "openwrt" ]; then
-          git clone https://github.com/waynesg/OpenWrt-Software.git package/waynesg
+          git clone -b $REPO_BRANCH --single-branch https://github.com/281677160/openwrt-package package/danshui
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
@@ -131,6 +135,7 @@ jobs:
         if [ -n "$(ls -A "build/${{matrix.target}}/patches" 2>/dev/null)" ]; then
           find "build/${{matrix.target}}/patches" -type f -name '*.patch' -print0 | sort -z | xargs -I % -t -0 -n 1 sh -c "cat '%'  | patch -d './' -p1 --forward --no-backup-if-mismatch"
         fi
+        mkdir -p files/usr/bin/AdGuardHome/data
         if [ -n "$(ls -A "build/${{matrix.target}}/files" 2>/dev/null)" ]; then
          cp -rf build/${{matrix.target}}/files files
          chmod -R 777 build/${{matrix.target}}/files/* ./
