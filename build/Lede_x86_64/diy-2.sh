@@ -19,11 +19,6 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/M
 find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-redir/shadowsocksr-libev-alt/g' {}
 find package/*/ feeds/*/ -maxdepth 2 -path "*luci-app-bypass/Makefile" | xargs -i sed -i 's/shadowsocksr-libev-ssr-server/shadowsocksr-libev-server/g' {}
 
-chmod 0755 package/waynesg/luci-app-smartinfo/root/usr/lib/smartinfo/smart_status.sh
-chmod 0755 package/waynesg/luci-app-smartinfo/root/etc/init.d/smartinfo
-chmod 0755 package/waynesg/wrtbwmon/usr/sbin/wrtbwmon
-chmod 0755 package/waynesg/wrtbwmon/etc/init.d/wrtbwmon
-
 # 设置密码为空（安装固件时无需密码登陆，然后自己修改想要的密码）
 # sed -i 's@.*CYXluq4wUazHjmCDBCqXF*@#&@g' package/lean/default-settings/files/zzz-default-settings
 
