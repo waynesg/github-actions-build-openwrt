@@ -128,8 +128,8 @@ jobs:
           git clone https://github.com/waynesg/OpenWrt-Software.git package/waynesg
           chmod +x package/waynesg/luci-app-smartinfo/root/usr/lib/smartinfo/smart_status.sh
           chmod +x package/waynesg/luci-app-smartinfo/root/etc/init.d/smartinfo
-          chmod +x package/waynesg/wrtbwmon/usr/sbin/wrtbwmon
-          chmod +x package/waynesg/wrtbwmon/etc/init.d/wrtbwmon
+          chmod +x package/waynesg/wrtbwmon/root/usr/sbin/wrtbwmon
+          chmod +x package/waynesg/wrtbwmon/root/etc/init.d/wrtbwmon
         fi
         ./scripts/feeds clean && ./scripts/feeds update -a && ./scripts/feeds install -a && ./scripts/feeds install -a
         if [ -f "build/${{matrix.target}}/$DIY_P2_SH" ]; then
