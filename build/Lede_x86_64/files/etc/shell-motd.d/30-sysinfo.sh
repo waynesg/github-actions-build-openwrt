@@ -118,7 +118,7 @@ sys_tempx=`echo $sys_temp | sed 's/ / /g'`
 
 
 # display info
-printf "设备信息： 3865U 六网口软路由电脑工控机"
+printf "设备信息： 软路由迷你电脑工控机"
 echo ""
 
 printf "CPU 型号:  \x1B[92m%s\x1B[0m" "$sys_tempx"
